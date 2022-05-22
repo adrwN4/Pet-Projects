@@ -1,0 +1,64 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+url = "URL"
+srv = Service("C:\chromedriver.exe")
+browser = webdriver.Chrome(service=srv)
+
+try:
+    browser.get(url=url)
+    time.sleep(5)
+    inn_form_login = browser.find_element(By.XPATH, "//xpath")
+    inn_form_login.send_keys('LOGIN')
+    time.sleep(3)
+    inn_form_password = browser.find_element(By.XPATH, "//xpath")
+    time.sleep(2)
+    inn_form_password.send_keys('PASS')
+    inn_form_password.send_keys(Keys.ENTER)
+    time.sleep(8)
+    element = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//xpath"))
+    )
+    tab_invoice_analytic.send_keys(Keys.ENTER)
+    time.sleep(15)
+
+    print("Parent window title: " + browser.title)
+    p = browser.current_window_handle
+    chwd = browser.window_handles
+    for w in chwd:
+        if (w != p):
+            browser.switch_to.window(w)
+        print("Child window title: " + browser.title)
+
+    raw_data_export_page = browser.find_element(By.XPATH, "//xpath").click()
+    time.sleep(4)
+    chice_list = browser.find_element(By.XPATH, "//xpath").click()
+    time.sleep(3)
+    inn_form3 = browser.find_element(By.XPATH, "//xpath").click()
+    time.sleep(5)
+    gnrt_btn = browser.find_element(By.XPATH, "//xpath").click()
+    time.sleep(15)
+    refresh = browser.find_element(By.XPATH, "//xpath").click()
+    time.sleep(10)
+    download = browser.find_element(By.XPATH, "//xpath").click()
+    time.sleep(6)
+
+def findelement(value):
+    element = browser.find_element(By.XPATH, (value))
+    element.click()
+    time.sleep(3)
+
+step_1 = findelement("//xpath)
+step_2 = findelement("//xpath")
+step_N = findelement("//xpath")
+
+except Exception as ex:
+     print(ex)
+finally:
+         browser.close()
+         browser.quit()
